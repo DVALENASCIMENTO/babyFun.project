@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function playBackgroundSound() {
         const backgroundAudio = new Audio('sounds/background.mp3');
         backgroundAudio.volume = 0.01;
-        backgroundAudio.loop = true;
+        backgroundAudio.loop = false;
         backgroundAudio.play().catch(error => {
             console.error("Falha ao reproduzir o som de fundo:", error);
         });
