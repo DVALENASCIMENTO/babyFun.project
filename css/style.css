@@ -43,11 +43,12 @@ h1 {
     display: flex;
     justify-content: center;
     margin: 2rem 0;
+    gap: 1.5rem; /* Espaçamento entre os botões */
 }
 
 .menu button {
-    width: 150px;
-    height: 150px;
+    width: 120px; /* Diminuído */
+    height: 120px; /* Diminuído */
     border: none;
     border-radius: 10px;
     cursor: pointer;
@@ -57,11 +58,13 @@ h1 {
 }
 
 #letrasButton {
-    background-image: url('images/letters.png'); /* Substitua pelo caminho da imagem dos botões */
+    background-image: url('../images/abc.jpg'); /* Caminho da imagem dos botões */
+    background-size: 100% 100%; /* Ajusta a imagem ao tamanho do botão */
 }
 
 #numerosButton {
-    background-image: url('images/numbers.png'); /* Substitua pelo caminho da imagem dos botões */
+    background-image: url('../images/123.png'); /* Caminho da imagem dos botões */
+    background-size: 100% 100%; /* Ajusta a imagem ao tamanho do botão */
 }
 
 .menu button:active {
@@ -117,6 +120,8 @@ button#nextButton {
     border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    display: block; /* Garante que o botão seja exibido */
+    margin: 1rem auto; /* Centraliza o botão */
 }
 
 button#nextButton:hover {
@@ -146,12 +151,15 @@ footer a:hover {
 /* Responsividade */
 @media (max-width: 768px) {
     .menu {
-        flex-direction: column;
+        flex-direction: row; /* Mantém os botões lado a lado */
+        flex-wrap: wrap; /* Permite que os botões se movam para a linha seguinte se não couberem na mesma linha */
+        justify-content: center; /* Centraliza os botões */
     }
     
     .menu button {
-        width: 120px;
-        height: 120px;
+        width: 100px; /* Diminuído */
+        height: 100px; /* Diminuído */
+        background-size: 100% 100%; /* Ajusta a imagem ao tamanho do botão */
     }
 
     .optionButton {
