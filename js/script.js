@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const options = generateOptions(currentLetterOrNumber);
         
         contentDiv.innerHTML = `
-            <h2>Escolha o correspondente para: <span class="highlight">${currentLetterOrNumber}</span></h2>
+            <h2><span class="highlight">${currentLetterOrNumber}</span></h2>
             <div class="options">
                 ${options.map(option => `<button class="optionButton">${option}</button>`).join("")}
             </div>
@@ -64,17 +64,25 @@ document.addEventListener("DOMContentLoaded", function() {
         if (button.textContent === correctOption) {
             button.classList.add("correct-answer"); // Adiciona a classe para brilho
             playSound("correct");
-            setTimeout(() => playSound(correctOption.toLowerCase()), 1000); // Adiciona um atraso de 1 segundo
+            setTimeout(() => {
+                playSound(correctOption.toLowerCase()); // Toca o som correto
+                resetButtons(); // Habilita novamente os botões após a resposta correta
+            }, 1000); // Adiciona um atraso de 1 segundo
         } else {
             playSound("incorrect");
+            button.classList.add("incorrect-answer"); // Adiciona uma classe para feedback incorreto
         }
-
-        // Desativa todos os botões após uma resposta ser selecionada
-        document.querySelectorAll(".optionButton").forEach(btn => btn.disabled = true);
     }
 
     function playSound(sound) {
         const audio = new Audio(`sounds/${sound}.mp3`);
         audio.play();
+    }
+
+    function resetButtons() {
+        document.querySelectorAll(".optionButton").forEach(btn => {
+            btn.disabled = false; // Reabilita todos os botões
+            btn.classList.remove("correct-answer", "incorrect-answer"); // Remove qualquer classe de feedback
+        });
     }
 });

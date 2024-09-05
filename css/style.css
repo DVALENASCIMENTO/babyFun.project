@@ -140,6 +140,8 @@ button#nextButton {
     transition: background-color 0.3s ease;
     display: block; /* Garante que o botão seja exibido */
     margin: 1rem auto; /* Centraliza o botão */
+    position: relative;
+    z-index: 10; /* Garante que o botão esteja acima do conteúdo */
 }
 
 button#nextButton:hover {
@@ -152,19 +154,11 @@ button#nextButton:hover {
     transition: box-shadow 0.5s ease;
 }
 
-.hidden {
-    display: none;
-}
-
-
-
 footer {
     text-align: center;
     background-color: #333;
     color: white;
     padding: 1rem;
-    position: fixed;
-    bottom: 0;
     width: 100%;
 }
 
