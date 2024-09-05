@@ -1,0 +1,174 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #e91e63; /* Cor Primária */
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    animation: pulse 2s infinite; /* Animação do título */
+    background: linear-gradient(45deg, #e91e63, #ffeb3b, #2196f3, #ff5722);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+@keyframes pulse {
+    0% {
+        color: #e91e63; /* Cor Primária */
+        text-shadow: 0 0 5px #ffeb3b, 0 0 10px #ffeb3b, 0 0 15px #ffeb3b, 0 0 20px #ff5722, 0 0 30px #ff5722, 0 0 40px #ff5722, 0 0 50px #ff5722;
+    }
+    50% {
+        color: #ffeb3b; /* Cor Secundária */
+        text-shadow: 0 0 5px #e91e63, 0 0 10px #e91e63, 0 0 15px #e91e63, 0 0 20px #2196f3, 0 0 30px #2196f3, 0 0 40px #2196f3, 0 0 50px #2196f3;
+    }
+    100% {
+        color: #2196f3; /* Cor Complementar */
+        text-shadow: 0 0 5px #ff5722, 0 0 10px #ff5722, 0 0 15px #ff5722, 0 0 20px #e91e63, 0 0 30px #e91e63, 0 0 40px #e91e63, 0 0 50px #e91e63;
+    }
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+    gap: 1.5rem; /* Espaçamento entre os botões */
+}
+
+.menu button {
+    width: 120px; /* Diminuído */
+    height: 120px; /* Diminuído */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    transition: box-shadow 0.3s ease, filter 0.3s ease;
+}
+
+#letrasButton {
+    background-image: url('../images/abc.jpg'); /* Caminho da imagem dos botões */
+    background-size: 100% 100%; /* Ajusta a imagem ao tamanho do botão */
+}
+
+#numerosButton {
+    background-image: url('../images/123.png'); /* Caminho da imagem dos botões */
+    background-size: 100% 100%; /* Ajusta a imagem ao tamanho do botão */
+}
+
+.menu button:active {
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.6); /* Cor do brilho quando clicado */
+    filter: brightness(1.2); /* Aumenta o brilho quando clicado */
+}
+
+.content {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.content h2 {
+    font-size: 1.5rem;
+}
+
+.highlight {
+    color: #ff5722; /* Cor de Acento */
+}
+
+.options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.optionButton {
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+    background-color: #ffeb3b; /* Cor Secundária */
+    color: #333;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.optionButton:hover {
+    background-color: #fdd835; /* Cor Secundária mais escura */
+}
+
+.hidden {
+    display: none;
+}
+
+button#nextButton {
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+    background-color: #e91e63; /* Cor Primária */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block; /* Garante que o botão seja exibido */
+    margin: 1rem auto; /* Centraliza o botão */
+}
+
+button#nextButton:hover {
+    background-color: #c2185b; /* Cor Primária mais escura */
+}
+
+footer {
+    text-align: center;
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer a {
+    color: #ffeb3b; /* Cor Secundária */
+    margin: 0 0.5rem;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .menu {
+        flex-direction: row; /* Mantém os botões lado a lado */
+        flex-wrap: wrap; /* Permite que os botões se movam para a linha seguinte se não couberem na mesma linha */
+        justify-content: center; /* Centraliza os botões */
+    }
+    
+    .menu button {
+        width: 100px; /* Diminuído */
+        height: 100px; /* Diminuído */
+        background-size: 100% 100%; /* Ajusta a imagem ao tamanho do botão */
+    }
+
+    .optionButton {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+
+    button#nextButton {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+}
