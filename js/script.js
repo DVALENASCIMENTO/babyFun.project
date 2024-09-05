@@ -10,26 +10,26 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("letrasButton").addEventListener("click", function() {
         currentSet = letras;
         currentIndex = 0;
-        loadLetterOrNumber();
+        loadLetterOrNumber(true); // Indica que o áudio deve ser tocado
     });
 
     document.getElementById("numerosButton").addEventListener("click", function() {
         currentSet = numeros;
         currentIndex = 0;
-        loadLetterOrNumber();
+        loadLetterOrNumber(true); // Indica que o áudio deve ser tocado
     });
 
     nextButton.addEventListener("click", function() {
         currentIndex++;
         if (currentIndex < currentSet.length) {
-            loadLetterOrNumber();
+            loadLetterOrNumber(true); // Toca o áudio quando a próxima questão é carregada
         } else {
             contentDiv.innerHTML = "<h2>Parabéns! Você completou todas as opções!</h2>";
             nextButton.classList.add("hidden");
         }
     });
 
-    function loadLetterOrNumber() {
+    function loadLetterOrNumber(playAudio = false) {
         const currentLetterOrNumber = currentSet[currentIndex];
         const options = generateOptions(currentLetterOrNumber);
         
@@ -39,7 +39,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 ${options.map(option => `<button class="optionButton">${option}</button>`).join("")}
             </div>
         `;
-        
+
+        if (playAudio) {
+            playSound(`audio-${currentLetterOrNumber.toLowerCase()}`);
+        }
+
         document.querySelectorAll(".optionButton").forEach(button => {
             button.addEventListener("click", function() {
                 checkAnswer(this, currentLetterOrNumber);
@@ -65,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function() {
             button.classList.add("correct-answer"); // Adiciona a classe para brilho
             playSound("correct");
             setTimeout(() => {
-                playSound(correctOption.toLowerCase()); // Toca o som correto
+                playSound(`audio-${correctOption.toLowerCase()}`); // Toca o som correto
                 resetButtons(); // Habilita novamente os botões após a resposta correta
             }, 1000); // Adiciona um atraso de 1 segundo
         } else {
@@ -76,7 +80,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function playSound(sound) {
         const audio = new Audio(`sounds/${sound}.mp3`);
-        audio.play();
+        audio.play().catch(error => {
+            console.error("Falha ao reproduzir áudio:", error);
+        });
     }
 
     function resetButtons() {
