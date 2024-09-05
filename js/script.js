@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const numeros = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
     let currentSet = [];
     let currentIndex = 0;
+    let audioStarted = false; // Variável para rastrear se o áudio de fundo já foi iniciado
 
     const contentDiv = document.getElementById("content");
     const nextButton = document.getElementById("nextButton");
@@ -26,6 +27,14 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
             contentDiv.innerHTML = "<h2>Parabéns! Você completou todas as opções!</h2>";
             nextButton.classList.add("hidden");
+        }
+    });
+
+    // Adiciona um evento de clique global para iniciar o som de fundo
+    document.addEventListener("click", function() {
+        if (!audioStarted) {
+            playBackgroundSound();
+            audioStarted = true; // Marca que o áudio de fundo foi iniciado
         }
     });
 
@@ -92,11 +101,9 @@ document.addEventListener("DOMContentLoaded", function() {
     function playBackgroundSound() {
         const backgroundAudio = new Audio('sounds/background.mp3');
         backgroundAudio.volume = 0.01;
-        backgroundAudio.loop = false; // Remover o loop
+        backgroundAudio.loop = false;
         backgroundAudio.play().catch(error => {
             console.error("Falha ao reproduzir o som de fundo:", error);
         });
     }
-
-    playBackgroundSound();
 });
