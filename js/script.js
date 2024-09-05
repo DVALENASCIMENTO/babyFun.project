@@ -10,26 +10,26 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("letrasButton").addEventListener("click", function() {
         currentSet = letras;
         currentIndex = 0;
-        loadLetterOrNumber(true); // Indica que o áudio deve ser tocado
+        loadLetterOrNumber(); 
     });
 
     document.getElementById("numerosButton").addEventListener("click", function() {
         currentSet = numeros;
         currentIndex = 0;
-        loadLetterOrNumber(true); // Indica que o áudio deve ser tocado
+        loadLetterOrNumber(); 
     });
 
     nextButton.addEventListener("click", function() {
         currentIndex++;
         if (currentIndex < currentSet.length) {
-            loadLetterOrNumber(true); // Toca o áudio quando a próxima questão é carregada
+            loadLetterOrNumber();
         } else {
             contentDiv.innerHTML = "<h2>Parabéns! Você completou todas as opções!</h2>";
             nextButton.classList.add("hidden");
         }
     });
 
-    function loadLetterOrNumber(playAudio = false) {
+    function loadLetterOrNumber() {
         const currentLetterOrNumber = currentSet[currentIndex];
         const options = generateOptions(currentLetterOrNumber);
         
@@ -39,10 +39,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 ${options.map(option => `<button class="optionButton">${option}</button>`).join("")}
             </div>
         `;
-
-        if (playAudio) {
-            playSound(`audio-${currentLetterOrNumber.toLowerCase()}`);
-        }
 
         document.querySelectorAll(".optionButton").forEach(button => {
             button.addEventListener("click", function() {
@@ -67,19 +63,20 @@ document.addEventListener("DOMContentLoaded", function() {
     function checkAnswer(button, correctOption) {
         if (button.textContent === correctOption) {
             button.classList.add("correct-answer"); // Adiciona a classe para brilho
-            playSound("correct");
+            playSound("correct", 0.2); // Volume reduzido para o som "correct"
             setTimeout(() => {
-                playSound(`audio-${correctOption.toLowerCase()}`); // Toca o som correto
+                playSound(`audio-${correctOption.toLowerCase()}`, 1.0); // Volume máximo para o som da letra/número
                 resetButtons(); // Habilita novamente os botões após a resposta correta
-            }, 1000); // Adiciona um atraso de 1 segundo
+            }, 1000); // Adiciona um atraso de 1 segundo para feedback visual
         } else {
-            playSound("incorrect");
+            playSound("incorrect", 0.5); // Volume padrão para som incorreto
             button.classList.add("incorrect-answer"); // Adiciona uma classe para feedback incorreto
         }
     }
 
-    function playSound(sound) {
+    function playSound(sound, volume = 3.0) {
         const audio = new Audio(`sounds/${sound}.mp3`);
+        audio.volume = volume; // Define o volume do áudio
         audio.play().catch(error => {
             console.error("Falha ao reproduzir áudio:", error);
         });
@@ -91,4 +88,17 @@ document.addEventListener("DOMContentLoaded", function() {
             btn.classList.remove("correct-answer", "incorrect-answer"); // Remove qualquer classe de feedback
         });
     }
+
+    // Função para baixar o volume do som de fundo
+    function playBackgroundSound() {
+        const backgroundAudio = new Audio('sounds/background.mp3');
+        backgroundAudio.volume = 0.01; // Volume reduzido para o som de fundo
+        backgroundAudio.loop = true; // Define para tocar em loop
+        backgroundAudio.play().catch(error => {
+            console.error("Falha ao reproduzir o som de fundo:", error);
+        });
+    }
+
+    // Iniciar o som de fundo
+    playBackgroundSound();
 });
