@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
         document.querySelectorAll(".optionButton").forEach(button => {
             button.addEventListener("click", function() {
-                checkAnswer(this.textContent, currentLetterOrNumber);
+                checkAnswer(this, currentLetterOrNumber);
             });
         });
 
@@ -60,13 +60,17 @@ document.addEventListener("DOMContentLoaded", function() {
         return options.sort(() => Math.random() - 0.5);
     }
 
-    function checkAnswer(selectedOption, correctOption) {
-        if (selectedOption === correctOption) {
+    function checkAnswer(button, correctOption) {
+        if (button.textContent === correctOption) {
+            button.classList.add("correct-answer"); // Adiciona a classe para brilho
             playSound("correct");
-            playSound(correctOption.toLowerCase());
+            setTimeout(() => playSound(correctOption.toLowerCase()), 1000); // Adiciona um atraso de 1 segundo
         } else {
             playSound("incorrect");
         }
+
+        // Desativa todos os botões após uma resposta ser selecionada
+        document.querySelectorAll(".optionButton").forEach(btn => btn.disabled = true);
     }
 
     function playSound(sound) {

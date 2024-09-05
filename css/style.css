@@ -78,11 +78,13 @@ h1 {
 }
 
 .content h2 {
-    font-size: 1.5rem;
+    font-size: 2.5rem; /* Aumentado para melhorar a visibilidade */
 }
 
 .highlight {
+    font-size: 4rem; /* Tamanho grande para a letra ou número destacado */
     color: #ff5722; /* Cor de Acento */
+    font-weight: bold;
 }
 
 .options {
@@ -93,18 +95,34 @@ h1 {
 }
 
 .optionButton {
-    font-size: 1.2rem;
+    font-size: 2rem; /* Aumentado para melhorar a visibilidade */
     padding: 1rem 2rem;
     background-color: #ffeb3b; /* Cor Secundária */
     color: #333;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Inclui transição de sombra */
 }
 
 .optionButton:hover {
     background-color: #fdd835; /* Cor Secundária mais escura */
+}
+
+.optionButton.correct {
+    animation: shine 1s ease-in-out; /* Animação de brilho */
+}
+
+@keyframes shine {
+    0% {
+        box-shadow: 0 0 0 rgba(255, 215, 0, 0);
+    }
+    50% {
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Cor do brilho */
+    }
+    100% {
+        box-shadow: 0 0 0 rgba(255, 215, 0, 0);
+    }
 }
 
 .hidden {
@@ -112,7 +130,7 @@ h1 {
 }
 
 button#nextButton {
-    font-size: 1.2rem;
+    font-size: 1.5rem; /* Aumentado para melhorar a visibilidade */
     padding: 1rem 2rem;
     background-color: #e91e63; /* Cor Primária */
     color: white;
@@ -127,6 +145,18 @@ button#nextButton {
 button#nextButton:hover {
     background-color: #c2185b; /* Cor Primária mais escura */
 }
+
+.correct-answer {
+    background-color: #00e676; /* Verde brilhante */
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.6); /* Brilho verde */
+    transition: box-shadow 0.5s ease;
+}
+
+.hidden {
+    display: none;
+}
+
+
 
 footer {
     text-align: center;
@@ -163,12 +193,12 @@ footer a:hover {
     }
 
     .optionButton {
-        font-size: 1rem;
+        font-size: 1.5rem; /* Ajustado para dispositivos menores */
         padding: 0.5rem 1rem;
     }
 
     button#nextButton {
-        font-size: 1rem;
+        font-size: 1.2rem; /* Ajustado para dispositivos menores */
         padding: 0.5rem 1rem;
     }
 }
